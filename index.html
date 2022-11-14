@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MetaMask Docs - Lochis Copy</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <nav id="navbar">
+    <header>
+      <h3>
+        MetaMask Documentation
+      </h3>
+      <ul>
+        <li><a class="nav-link" href="#Introduction">Introduction</a></li>
+        <li><a class="nav-link"  href="#Getting_Started">Getting Started</a></li>
+        <li><a class="nav-link"  href="#Common_Terms">Common Terms</a></li>
+        <li><a class="nav-link"  href="#Initializing_Dapps">Initializing Dapps</a></li>
+        <li><a class="nav-link"  href="#Accessing_Accounts">Accessing Accounts</a></li>
+        <li><a class="nav-link"  href="#Sending_Transactions">Sending Transactions</a></li>
+      </ul>
+    </header>
+  </nav>
+  <main id="main-doc">
+    <section class="main-section" id="Introduction">
+      <header>Introduction</header>
+        <p>Welcome to MetaMask’s Developer Documentation. MetaMask is the trailblazing tool enabling user interactions
+          and experience on Web3. It is currently available as a browser extension and as a mobile app on both Android
+          and iOS devices. The purpose of this documentation is to illustrate how to build a dapp with MetaMask.</p>
+        <ul>
+          <li>You can find the latest version of MetaMask on our <a href="https://metamask.io/">official website</a>
+          </li>
+          <li>For help using MetaMask, visit our <a href="https://metamask.zendesk.com/">User Support Site</a></li>
+          <li>For up to the minute news, follow our <a href="https://twitter.com/MetaMask">Twitter</a> or <a
+              href="https://medium.com/metamask">Medium</a> pages.</li>
+          <li>To learn how to contribute to the MetaMask project itself, visit our <a
+              href="https://github.com/MetaMask/metamask-extension/tree/develop/docs">Internal Docs</a></li>
+        </ul>
+
+        <h3>Why MetaMask</h3>
+        <hr />
+        <p>MetaMask was created to meet the needs of secure and usable Ethereum-based web sites. In particular, it
+          handles account management and connection the user to the blockchain.</p>
+        <ul>
+          <li><a href="https://docs.metamask.io/guide/getting-started.html">Get started here</a></li>
+          <li><a href="https://docs.metamask.io/guide/ethereum-provider.html">Learn more about our JavaScript Provider
+              API</a></li>
+          <li><a href="https://docs.metamask.io/guide/rpc-api.html">Learn more about our RPC API</a></li>
+        </ul>
+        <h3>Account Management</h3>
+        <hr />
+        <p>MetaMask allows users to manage accounts and their keys in a variety of ways, including hardware wallets,
+          while isolating them from the site context. This is a great security improvement over storing the user keys on
+          a single central server, or even in local storage, which can allow for <a
+            href="https://www.ccn.com/cryptocurrency-exchange-etherdelta-hacked-in-dns-hijacking-scheme/">mass account
+            thefts.</a></p>
+        <p>This security feature also comes with developer convenience: For developers, you simply interact with the
+          globally available <code>ethereum</code> API that identifies the users of web3-compatible browsers (like
+          MetaMask users), and whenever you request a transaction signature (like <code>eth_sendTransaction,
+            eth_signTypedData</code> or others), MetaMask will prompt the user in as comprehensible a way as possible.
+          This keeps users informed, and leaves attackers only the option of trying to phish individual users, rather
+          than performing mass hacks (although <a
+            href="https://medium.com/metamask/new-phishing-strategy-becoming-common-1b1123837168">DNS hacks can still be
+            used for phishing en masse</a>).</p>
+        <h3>Blockchain Connection</h3>
+        <hr />
+        <p>MetaMask comes pre-loaded with fast connections to the Ethereum blockchain and several test networks via our
+          friends at <a href="https://infura.io/">Infura</a>. This allows you to get started without synchronizing a
+          full node, while still providing the option to upgrade your security and use the blockchain provider of your
+          choice.</p>
+        <p>Today, MetaMask is compatible with any blockchain that exposes an <a
+            href="https://eth.wiki/json-rpc/API">Ethereum-compatible JSON RPC API</a>, including custom and private
+          blockchains. For development, we recommend running a test blockchain like <a
+            href="https://www.trufflesuite.com/ganache">Ganache</a>.</p>
+        <p>We are aware that there are constantly new private blockchains being created. If you are interested in
+          integrating MetaMask with your own custom network, <a
+            href="https://medium.com/metamask/connect-users-to-layer-2-networks-with-the-metamask-custom-networks-api-d0873fac51e5">we
+            have an API that has already enabled a number of networks to do the same</a>.</p>
+        <h3>New Dapp Developers</h3>
+        <hr />
+        <ul>
+          <li><a href="https://karl.tech/learning-solidity-part-1-deploy-a-contract/">Learning Solidity</a> by karl
+            Floersch</li>
+          <li><a href="https://cryptozombies.io/">CryptoZombies</a></li>
+          <li><a href="https://www.trufflesuite.com/docs/truffle/quickstart">Getting Started with Truffle</a></li>
+          <li><a
+              href="https://github.com/ConsenSys-Academy/Blockchain-Developer-Bootcamp/blob/main/docs/S00-intro/L6-keeping-up/index.md">Keeping
+              up with Blockchain Development (from ConsenSys Academy)</a></li>
+          <li>Launch into the Web3 space with <a href="https://consensys.net/academy/bootcamp/">ConsenSys Academy's
+              Blockchain Developer Bootcamp</a></li>
+          <li>Explore everything ConsenSys at the <a href="https://consensys.net/developers/"></a></li>
+        </ul>
+    </section>
+    <section class="main-section" id="Getting_Started">
+      <header>Getting Started</header>
+        <p>To develop for MetaMask, install MetaMask in the browser of your choice on your development machine. <a
+            href="https://metamask.io/">Download here</a>.</p>
+        <p>Once MetaMask is installed and running (make sure you back up your Secret Recovery Phrase), you should find
+          that new browser tabs have a <code class="code-normal">window.ethereum</code> object available in the
+          developer console. This is how your website will interact with MetaMask.</p>
+        <p>You can review the full API for that object <a
+            href="https://docs.metamask.io/guide/ethereum-provider.html">here</a>. Note that <strong>over the course of
+            2020</strong>, we introduced significant changes to this API, and we recommend that you refer to its
+          documentation.<p>
+            <h3>Basic Considerations</h3>
+            <hr />
+            <h4>Web3 Browser Detection</h4>
+            <p>To verify if the browser is running MetaMask, copy and paste the code snippet below in the developer
+              console of your web browser:</p>
+            <p class="code-dark"><code>if (typeof window.ethereum !== 'undefined') {
+                <br>
+                console.log('MetaMask is installed!');
+                <br>
+                }</code></p>
+            <p>You can review the full API for the <code class="code-normal">window.ethereum</code> object <a
+                href="https://docs.metamask.io/guide/ethereum-provider.html">here</a>.</p>
+            <h3>Running a Test Network</h3>
+            <p>In the top right menu of MetaMask, select the network that you are currently connected to. Among several
+              popular defaults, you'll find <code class="code-normal">Custom RPC</code> and <code
+                class="code-normal">Localhost 8545</code>. These are both useful for connecting to a test blockchain,
+              like <a href="https://www.trufflesuite.com/ganache">ganache</a>. You can quickly install and start Ganache
+              if you have <code class="code-normal">npm</code> installed with <code class="code-normal">npm i -g
+                ganache-cli && ganache-cli</code>.</p>
+            <p>Ganache has some great features for starting your application with different states. If you application
+              starts with the <code class="code-normal">-m</code> flag, you can feed it the same seed phrase you have in
+              your MetaMask, and the test network will give each of your first 10 accoutns 100 test ether, which makes
+              it easier to start work.</p>
+            <p>Since your seed phrase has the power to control all your accounts, it is probably worth keeping at least
+              one seed phrase for development, separate from any that you use for storing real value. One easy way to
+              manage multiple seed phrases with MetaMask, is with multiple browser profiles, each of which can have its
+              own clean extension installations.</p>
+            <h5>Resetting Your Local Nonce Calculation</h5>
+            <p>If you're running a test blockchain and restart it, you can accidentally confuse MetaMask because it
+              calculates the next <a href="">nonce</a> based on both the network state <i>and</i> the known sent
+              transactions.</p>
+            <p>To clear MetaMask's transaction queue, and effectively reset its nonce calculation, you can use the <code
+                class="code-normal">Reset Account</code> button in <code class="code-normal">Settings</code> (available
+              in the top-right identicon menu).<p>
+                <h3>Detecting MetaMask</h3>
+                <p>If you want to differentiate MetaMask from other Ethereum-compatible browsers, you can detect
+                  MetaMask using <code class="code-normal">ethereum.isMetaMask</code>.</p>
+                <h3>User state</h3>
+                <p>Currently there are a few stateful things to consider when interacting with this API:</p>
+                <ul>
+                  <li>What is the current network?</li>
+                  <li>What is the current account?</li>
+                </ul>
+                <p>Both of these are available synchronously as <code class="code-normal">ethereum.networkVersion</code>
+                  and <code class="code-normal">ethereum.selectedAddress</code>. You can listen for changes using events
+                  too, see (<a href="https://docs.metamask.io/guide/ethereum-provider.html">the API reference</a>).</p>
+                <h3>Connecting to MetaMask</h3>
+                <p>"Connecting" or "logging in" to MetaMask effectively means "to access the user's Ethereum
+                  account(s)".</p>
+                <p>You should <strong>only</strong> initiate a connection request in response to direct user action,
+                  such as clicking a button. You should <strong>always</strong> disable the "connect" button while the
+                  connection request is pending. You should <strong>never</strong> initiate a connection request on page
+                  load.</p>
+                <p>We recommend that you provide a button to allow the user to connect MetaMask to your dapp. Clicking
+                  this button should call the following method:</p>
+                <p class="code-dark">
+                  <code>ethereum.request({ method: 'eth_requestAccounts' });</code>
+                </p>
+                <p>Example:</p>
+                <input type="button" value="Enable Ethereum" onclick="alert('clicked!');"></input>
+                <h5>Javascript</h5>
+                <p class="code-dark">
+                  <code>const ethereumButton = document.querySelector('.enableEthereumButton');<br><br>
+                    ethereumButton.addEventListener('click', () => {
+                    <br>
+                    //Will Start the metamask extension <br>
+                    ethereum.request({ method: 'eth_requestAccounts' });
+                    <br>
+                    });</code>
+                </p>
+                <p>This promise-returning function resolves with an array of hex-prefixed Ethereum addresses, which can
+                  be used as general account references when sending transactions.</p>
+                <p>Over time, this method is intended to grow to include various additional parameters to help your site
+                  request everything it needs from the user during setup.</p>
+                <p>Since it returns a promise, if you're in an <code class="code-normal">async</code> function, you may
+                  log in like this:</p>
+                <p class="code-dark">
+                  <code>
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });<br>
+                    const account = accounts[0];<br>
+                    // We currently only ever provide a single account,<br>
+                    // but the array gives us some room to grow.
+                  </code>
+                </p>
+                <p>Example:</p>
+                <input type="button" value="Enable Ethereum" onclick="alert('clicked!');"></input>
+                <p class="code-dark">
+                  <code>const ethereumButton = document.querySelector('.enableEthereumButton');<br>
+                    const showAccount = document.querySelector('.showAccount');<br><br>
+                    ethereumButton.addEventListener('click', () => { <br>
+                    getAccount();<br>
+                    });<br><br>
+
+                    async function getAccount() {<br>
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });<br>
+                    const account = accounts[0];<br>
+                    showAccount.innerHTML = account;<br>
+                    }
+                  </code>
+                </p>
+                <h3>Choosing a Convenience Library</h3>
+                <hr />
+                <p>Convenience libraries exist for a variety of reasons.</p>
+                <p>Some of them simplify the creation of specific user interface elements, some entirely manage the user
+                  account onboarding, and others give you a variety of methods of interacting with smart contracts, for
+                  a variety of API preferences, from promises, to callbacks, to strong types, and so on.</p>
+                <p>The provider API itself is very simple, and wraps <a
+                    href="https://eth.wiki/json-rpc/API#json-rpc-methods">Ethereum JSON-RPC</a> formatted messages,
+                  which is why developers usually use a convenience library for interacting with the provider, like <a
+                    href="https://www.npmjs.com/package/ethers">ethers</a>, <a
+                    href="https://www.npmjs.com/package/web3">web3.js</a>, <a
+                    href="https://www.trufflesuite.com/">truffle</a>, <a
+                    href="https://framework.embarklabs.io/">Embark</a>, or others. From those tools, you can generally
+                  find sufficient documentation to interact with the provider, without reading this lower-level API.</p>
+    </section>
+    <section class="main-section" id="Common_Terms">
+      <header>Common Terms</header>
+      <h3>Words are Hard</h3>
+      <hr />
+      <p>Every field has its terminology, and every specialization has its acronyms. You can't escape it.</p>
+      <p>The decentralized web is certainly no exception, and if you're new to Web3, take a gander at MetaMask's <a
+          href="https://metamask.zendesk.com/hc/en-us/articles/360015489611">introduction to blockchain article</a> in
+        our knowledgebase.</p>
+      <p>And no matter what your experience level, bookmark <a
+          href="https://consensys.net/knowledge-base/a-blockchain-glossary-for-beginners/">ConsenSys' blockchain
+          glossary</a>, an amalgamation of many sources of information that is regularly updated.</p>
+      <p>While the above glossary is in the process of being translated, you can read an older version of this glossary
+        in Spanish <a href="https://github.com/faraggi/words-are-hard-es/blob/master/words-are-hard-es.md">consulte aquí
+          una versión antigua de este glosario en español</a>, thanks to <a
+          href="https://github.com/faraggi">faraggi</a>
+    </section>
+    <section class="main-section" id="Initializing_Dapps">
+      <header>Initializing Dapps</header>
+      <p>Once you have your basic dev environment <a href="https://docs.metamask.io/guide/Getting-Started">set up</a>,
+        you are ready to start interacting with some smart contracts. There are some basic things you'll need,
+        regardless of what convenience library you're using, when communicating with a smart contract:</p>
+      <h3>The Contract Network</h3>
+      <hr />
+      <p>If you aren't connected to the right network, you aren't going to have any luck sending transactions to your
+        contract, so make sure you have this right! Many dapp developers choose to deploy their contract to a testnet
+        first, in order to avoid potentially disastrous fees if something goes wrong during development and testing on
+        mainnet.</p>
+      <p>No matter which network you deploy your final dapp on, your user will need to be able to access it. MetaMask
+        makes available <a
+          href="https://docs.metamask.io/guide/rpc-api.html#other-rpc-methods">wallet_switchEthereumChain</a>, as well
+        as <a href="https://docs.metamask.io/guide/rpc-api.html#wallet-addethereumchain">wallet_addEthereumChain</a>,
+        which allows you to prompt the user to add a chain that you suggest, and switch to it using a confirmation
+        dialogue.</p>
+      <h3>The Contract Address</h3>
+      <hr />
+      <p>Every account in Ethereum has an address, whether it's an external key-pair account, or a smart contract. In
+        order for any smart contract library to communicate with your contracts, they'll need to know its exact address.
+        If you deployed a contract, you probably know how to find the address, but if you're just getting started, check
+        out our Knowledgebase <a
+          href="https://metamask.zendesk.com/hc/en-us/articles/360059683451-How-to-view-or-add-custom-token-contract-address">explainer
+          on finding contract addresses.</a></p>
+      <h3>The Contract ABI</h3>
+      <hr />
+      <p>In Ethereum, <a href="https://solidity.readthedocs.io/en/develop/abi-spec.html">The ABI Specification</a> is a
+        way to encode the interface of a smart contract in a way that is comprehensible to your user interface. It is an
+        array of method-describing objects, and when you feed this and the address into a contract-abstraction library,
+        this ABI tells those libraries about what methods to provide, and how to compose transactions to call those
+        methods.
+        <p>Example libraries include:</p>
+        <ul>
+          <li><a href="https://www.npmjs.com/package/ethers">ethers</a></li>
+          <li><a href="https://www.npmjs.com/package/web3">web3.js</a></li>
+          <li><a href="https://framework.embarklabs.io/">Embark</a></li>
+          <li><a href="https://www.npmjs.com/package/ethjs">ethjs</a></li>
+          <li><a href="https://www.trufflesuite.com/">truffle</a></li>
+        </ul>
+        <br />
+        <h3>The Contract Bytecode</h3>
+        <hr />
+        <p>If your web app is going to publish a new smart contract that is pre-compiled, it may need to include some
+          <code class="code-normal">bytecode</code>. In this case, you will not know the contract address in advance,
+          but instead will have to publish, watch for the transaction to be processed, and then extract the final
+          contract's address from the completed transaction.</p>
+        <p>If publishing a contract from bytecode, you will still want an <code class="code-normal">ABI</code> if you
+          want to interact with it! The bytecode does not describe how to interact with the final contract.</p>
+        <h3>The Contract Source Code</h3>
+        <hr />
+        <p>If your website is going to allow users to edit smart contract source code and compile it, like <a
+            href="http://remix.ethereum.org/">Remix</a>, you may import a whole compiler. In this case you're going to
+          derive your bytecode and ABI from that source code, and eventually you will derive the contract's address from
+          the completed transaction, where that bytecode is published.</p>
+    </section>
+    <section class="main-section" id="Accessing_Accounts">
+      <header>Accessing Accounts</header>
+      <p>User accounts are used in a variety of contexts in Ethereum, including as identifiers and for signing
+        transactions. In order to request a signature from the user or have the user approve a transaction, one must be
+        able to access the user's accounts. The <code class="code-normal">wallet methods</code> below involve a
+        signature or transaction approval and all require the sending account as a function parameter.</p>
+      <ul>
+        <li><code class="code-normal">eth_sendTransaction</code></li>
+        <li><code class="code-normal">eth_sign</code> (insecure and unadvised to use)</li>
+        <li><code class="code-normal">personal_sign</code></li>
+        <li><code class="code-normal">eth_signTypedData</code></li>
+      </ul>
+      <p>Once you've <a href="">connected to a user</a>, you can always re-check the current account by checking <code
+          class="code-normal">ethereum.selectedAddress</code>.</p>
+      <p>Example:</p>
+      <input type="button" value="Connect to MetaMask" onclick="alert('clicked!');"></input>
+      </p>
+      <p>If you'd like to be notified when the address changes, we have an event you can subscribe to:</p>
+      <p class="code-dark">
+        <code>ethereum.on('accountsChanged', function (accounts) {</code>
+        <br />
+        <code>// Time to reload your interface with accounts[0]!</code>
+        <br />
+        <code>});</code>
+        </br>
+        <p>If the first account in the returned array isn't the account you expected, you should notify the user! In the
+          future, the accounts array may contain more than one account. This functionality isn't available yet. The
+          first account in the array will always be considered the user's "selected" account.</p>
+    </section>
+    <section class="main-section" id="Sending_Transactions">
+      <header>Sending Transactions</header>
+      <p>Transactions are a formal action on a blockchain. They are always initiated in MetaMask with a call to the
+        <code class="code-normal">eth_sendTransaction</code> method. They can involve a simple sending of ether, may
+        result in sending tokens, creating a new smart contract, or changing state on the blockchain in any number of
+        ways. They are always initiated by a signature from an <i>external account</i>, or a simple key pair.</p>
+      <p>In MetaMask, using the <code class="code-normal">ethereum.request</code> method directly, sending a transaction
+        will involve composing an options object like this:</p>
+      <p class="code-dark">
+        <code>const transactionParameters = { <br>
+          &emsp;nonce: '0x00', // ignored by MetaMask <br>
+          &emsp;gasPrice: '0x09184e72a000', // customizable by user during MetaMask confirmation.<br>
+          &emsp;gas: '0x2710', // customizable by user during MetaMask confirmation.<br>
+          &emsp;to: '0x0000000000000000000000000000000000000000', // Required except during contract publications.<br>
+          &emsp;from: ethereum.selectedAddress, // must match user's active address.<br>
+          &emsp;value: '0x00', // Only required to send ether to the recipient from the initiating external account.<br>
+          &emsp;data:
+          '0x7f7465737432000000000000000000000000000000000000000000000000000000600057', // Optional, but used for
+          defining smart contract creation and interaction.<br>
+          chainId: '0x3', // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.<br>
+          };<br><br>
+
+          // txHash is a hex string<br>
+          // As with any RPC call, it may throw an error<br>
+          const txHash = await ethereum.request({<br>
+          &emsp;method: 'eth_sendTransaction',<br>
+          &emsp;params: [transactionParameters],<br>
+          });<br>
+        </code>
+      </p>
+      <h3>Example</h3>
+      <hr />
+      <input type="button" value="Enable Ethereum" onclick="alert('clicked!');"></input>
+      <input type="button" id="green-btn" value="Send Eth" onclick="alert('clicked!');"></input>
+      <br>
+      <br>
+      <h3>Transaction Parameters</h3>
+      <hr />
+      <p>Many transaction parameters are handled for you by MetaMask, but it's good to know what all the parameters do.
+      </p>
+      <h4>Nonce [ignored]</h4>
+      <p>This field is ignored by MetaMask.</p>
+      <p>In Ethereum every transaction has a nonce. This is so that each transaction can only be processed by the
+        blockchain once. Additionally, to be a valid transaction, the nonce must either be 0, or a transaction with the
+        previous number must have already been processed.</p>
+      <p>That means that transactions are always processed in order for a given account, and so incrementing nonces is a
+        very sensitive matter that is easy to mess up, especially when a user is interacting with multiple applications
+        with pending transactions using the same account, potentially across multiple devices.</p>
+      <p>For these reasons, MetaMask currently does not provide application developers any way to customize the nonce of
+        transactions it suggests. Instead, MetaMask <a
+          href="https://metamask.zendesk.com/hc/en-us/articles/360015489251">assists the user in managing their
+          transaction queue themselves</a>.</p>
+      <h4>Gas Limit [optional]</h4>
+      <p>Optional parameter. Rarely useful to Dapp developers.</p>
+      <p>Gas limit is a highly optional parameter, and we automatically calculate a reasonable price for it. You will
+        probably know that your smart contract benefits from a custom gas limit if it ever does for some reason.</p>
+      <h4>To [semi-optional]</h4>
+      <p>A hex-encoded Ethereum address. Required for transactions with a recipient (all transactions except for
+        contract creation).</p>
+      <p>Contract creation occurs when there is no <code class="code-normal">to</code> value but there is a <code
+          class="code-normal">data</code> value.</p>
+      <h4>Data [semi-optional]</h4>
+      <p>Required for smart contract creation.</p>
+      <p>This field is also used for specifying contract methods and their parameters. You can learn more about how that
+        data is encoded on <a href="https://solidity.readthedocs.io/en/develop/abi-spec.html">the solidity ABI spec</a>.
+      </p>
+      <h4>Chain ID [currently ignored]</h4>
+      <p>Chain ID is currently derived by the user's current selected network at <code
+          class="code-normal">ethereum.networkVersion</code>. In the future we will probably allow a way to connect to
+        multiple networks at once, at which point this parameter will become important, so it may be useful to be in the
+        habit of including now.</p>
+    </section>
+  </main>
+  <footer>
+  </footer>
+</body>
+
+</html>
