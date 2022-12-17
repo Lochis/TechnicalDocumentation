@@ -71,7 +71,7 @@ footer{
   }
 
   #navbar h3 {
-    font-size: 16px;
+    font-size: 20px;
   }
 }
 
@@ -99,4 +99,8 @@ header{
 
 #navbar li a:hover{
   color: #3099F2;
+}
+
+#nav-link {
+  font-size: 18px;
 }
